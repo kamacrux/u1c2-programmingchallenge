@@ -48,21 +48,24 @@ public class Solution {
    
     public double adjustDigits(double userDouble) {
         // remove 0.0 and return your answer
+        int hundreds = (int)(userDouble/100);
         int tens = (int)(userDouble/10);
         int ones = (int)(userDouble%10/1);
         int tenths = (int)(userDouble%10%1*10%10);  
-        int hundredths = (int)(userDouble%10%1*100%100);
+        int hundredths = (int)(userDouble*100%10);
+        hundreds = (hundreds+1) % 10;
         tens = (tens+1)%10;
         ones = (ones+1)%10;
         tenths = (tenths+1)%10;
         hundredths = (hundredths+1)%10;
-        userDouble = (tens*10)+(ones*1)+((double)tenths/10)+((double)hundredths/100);
+        System.out.println(hundredths);
+        userDouble = (hundreds*100)+(tens*10)+(ones*1)+((double)tenths/10)+((double)hundredths/100);
         return userDouble;
     }
 
     public static void main(String[] args) {
         Solution s = new Solution();
-        System.out.println(s.adjustDigits(120.90));
+        System.out.println(s.adjustDigits(459.89));
         //231.01
     }
 
